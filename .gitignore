@@ -1,1 +1,8 @@
-/target
+vscode-extension/node_modules/**
+node_modules/**
+
+tsconfig.json
+.gitignore
+node_modules/
+Cargo.toml
+target/

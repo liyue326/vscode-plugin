@@ -1,0 +1,31 @@
+{
+    "name": "import-optimizer",
+    "displayName": "Import Optimizer",
+    "description": "Optimize import statements with Rust WASM",
+    "version": "1.0.0",
+    "publisher": "dev",
+    "engines": {
+      "vscode": "^1.60.0"
+    },
+    "categories": ["Formatters"],
+    "activationEvents": ["onLanguage:javascript", "onLanguage:typescript"],
+    "main": "./extension.js",
+    "contributes": {
+      "commands": [
+        {
+          "command": "import-optimizer.optimize",
+          "title": "Optimize Imports",
+          "category": "Import"
+        },
+        {
+          "command": "import-optimizer.test",
+          "title": "Test Optimizer",
+          "category": "Import"
+        }
+      ]
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/liyue326/vscode-plugin.git"
+    }
+  }
