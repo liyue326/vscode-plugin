@@ -1,0 +1,51 @@
+<!-- debug.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WASM 调试</title>
+</head>
+<body>
+    <h1>导入优化器调试</h1>
+    <div id="output"></div>
+
+    <script type="module">
+        // 直接从你的 pkg 目录导入
+        import init, { run_test_case, ImportOptimizer } from  'vscode-extension/pkg/import_optimizer.js'
+        
+        async function runDebug() {
+            await init();
+            
+            console.log("=== 开始调试 ===");
+            
+            // 运行预定义测试
+            const testResult = run_test_case();
+        console.log("预定义测试结果:", testResult);
+        
+        // 测试实际代码
+        const optimizer = new ImportOptimizer();
+        optimizer.set_rules(true, true, true);
+        
+        const testInput = `import request from "@/api/request.js";
+import utils from "@/utils/utils";
+import utils2 from "@/utils/utils";
+import { mapActions } from "vuex";
+import { mapState } from "vuex";`;
+        
+        const actualResult = optimizer.optimize(testInput);
+        console.log("实际代码优化结果:", actualResult);
+        
+        // 显示在页面上
+        document.getElementById('output').innerHTML = 
+            `<pre>${testResult}</pre><hr><pre>${actualResult}</pre>;
+        
+        // 比较两者
+        if (testResult.includes("mapActions, mapState") && actualResult.includes("mapActions, mapState")) {
+            console.log("✅ 两种情况下都成功合并");
+        } else {
+            console.log("❌ 两种情况下的行为不一致");
+        }
+        
+        runDebug();
+    </script>
+</body>
+</html>

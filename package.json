@@ -14,12 +14,17 @@
       "commands": [
         {
           "command": "import-optimizer.optimize",
-          "title": "Optimize Imports",
+          "title": "开始优化",
           "category": "Import"
         },
         {
           "command": "import-optimizer.test",
           "title": "Test Optimizer",
+          "category": "Import"
+        },
+        {
+          "command": "import-optimizer.testMerge",
+          "title": "Test Vuex Merge",
           "category": "Import"
         }
       ]
