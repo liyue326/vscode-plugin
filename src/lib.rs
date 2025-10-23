@@ -62,6 +62,7 @@ struct MergedImport {
 }
 
 impl ImportOptimizer {
+    // 提取import
     fn parse_imports(&self, code: &str) -> Vec<ImportInfo> {
         let mut imports = Vec::new();
         
@@ -77,7 +78,7 @@ impl ImportOptimizer {
         
         imports
     }
-
+    // 将一行 import 语句转换成结构化的数据！ Option固定的标准库类型，处理"可能有值可能空
     fn parse_import_line(&self, line: &str, line_num: usize) -> Option<ImportInfo> {
         // 必须包含 "from" 才是有效的导入语句
         if !line.contains("from") {
@@ -146,7 +147,7 @@ impl ImportOptimizer {
         let part = import_part.trim();
         
         println!("[DEBUG] 解析导入子句: '{}'", part);
-        
+        // 不能省略return 可以省略 return 的情况：函数最后一行作为返回值if 表达式的结果直接作为返回值 简单的单路径函数
         if part.is_empty() {
             return (None, Vec::new(), None);
         }
@@ -159,7 +160,7 @@ impl ImportOptimizer {
             }
         }
         
-        // 然后检查纯命名导入 - 这是最重要的修复
+        // 然后检查纯命名导入
         if part.starts_with('{') && part.ends_with('}') {
             println!("[DEBUG] 检测到纯命名导入: '{}'", part);
             let inner = part[1..part.len()-1].trim();

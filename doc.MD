@@ -72,3 +72,13 @@
        &username.into()
    );
 # rust 与 js的交互 wasm-bindgen
+
+# 文件结构
+ - vscodeignore
+ - package.json
+ - extension.js
+
+- lib.rs和main.rs区别
+    WASM 项目 → 必须用 lib.rs
+    命令行工具 → 用 main.rs
+    给其他 Rust 代码用的库 → 用 lib.rs
